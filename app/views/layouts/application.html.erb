@@ -2,13 +2,23 @@
 <html>
 <head>
   <title>Buyers</title>
-  <%= stylesheet_link_tag :all %>
+  <%= stylesheet_link_tag 'application' %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
+  <%= yield(:head) %>
 </head>
 <body>
-
+<div id="user_nav">
+  <% if user_signed_in? -%>
+    <div id="user_login_box" style="float:right">
+      <%= current_user.user_name  %> |          
+      <%= current_user.email %> |
+      <%= link_to 'My info', edit_user_registration_path %> |
+      <%= link_to 'Back', :back %> |
+      <%= link_to 'Sign out', destroy_user_session_path, :method => "delete" %>
+    </div>
+  <% end -%>
+</div>
 <%= yield %>
-
 </body>
 </html>
