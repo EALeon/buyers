@@ -4,7 +4,7 @@
   <title>Buyers</title>
   <%= stylesheet_link_tag 'blueprint/screen'%>
   <%= stylesheet_link_tag 'custom', :media => 'screen' %>
-  <%= javascript_include_tag :default %>
+  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tag %>
   <%= yield(:head) %>
 </head>
@@ -20,7 +20,7 @@
         <% end -%>
         <% if user_signed_in? -%>
           <li><%= link_to 'My info', edit_user_registration_path %></li>
-          <li><%= link_to 'Sign out', destroy_user_session_path, :method => "delete" %></li>
+          <li><%= link_to 'Sign out', destroy_user_session_path %></li>
           <li><%= link_to 'New purchase', new_purchase_path %></li>
         <% else -%>
         <% end -%>
