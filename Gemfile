@@ -7,6 +7,8 @@ gem 'rails', '3.1.1'
 
 gem 'sqlite3'
 gem 'devise', '1.4.8'
+gem 'jquery-rails', '~> 1.0.16'
+#gem 'blueprint-rails'
 # Use unicorn as the web server
 # gem 'unicorn'
 

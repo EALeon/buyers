@@ -4,7 +4,7 @@ if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
   Bundler.require(*Rails.groups(:assets => %w(development test)))
   # If you want your assets lazily compiled in production, use this line
-  #Bundler.require(:default, :assets, Rails.env)
+  # Bundler.require(:default, :assets, Rails.env)
 end
 
 module Buyers
@@ -42,6 +42,6 @@ module Buyers
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-    config.secret_token = '738742a20b22d8b55ff679cdd71afeed9f5b5fd1c619534cb017a53ae05f34f036fd010d8a9d30c2e96fc675891ddd1b83672b059f70f97f0dbe1861d5f27f23'
+    config.secret_token = 'c7e3ebddfe11a13dd8f2377c6bc435052bdc4836806b31da194d5abcee23ee10fc4b7e5922d1c81dde4629ebb5da0768d5cdf0477d7e8b9815fdc1848ea49034'    
   end
 end

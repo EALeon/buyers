@@ -1,0 +1,26 @@
+<h1>Welcome to shopping catalog!<h1>
+<h2>Listing purchases</h2>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @purchases.each do |purchase| %>
+  <tr>
+    <td><%= purchase.name %></td>
+    <td><%= purchase.description %></td>
+    <td><%= link_to 'Show', purchase %></td>
+    <td><%= link_to 'Edit', edit_purchase_path(purchase) %></td>
+    <td><%= link_to 'Destroy', purchase_path(purchase), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+<br />
+
+<%unless user_signed_in? -%>
+  <%= link_to "Sign up now!", new_user_registration_path, :class => "signup_button round" %>
+<% end -%>

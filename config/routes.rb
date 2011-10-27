@@ -1,4 +1,13 @@
 Buyers::Application.routes.draw do
+  resources :purchases
+
+#  get "purchases/purchases"
+
+  devise_for :users, :path_names => {:sign_in => "register"}
+  root :to => 'purchases#index'
+
+#  match '/purchases/:id/destroy', :to => 'purchases#destroy'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -4,7 +4,7 @@
   <title>Buyers</title>
   <%= stylesheet_link_tag 'blueprint/screen'%>
   <%= stylesheet_link_tag 'custom', :media => 'screen' %>
-  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag :default %>
   <%= csrf_meta_tag %>
   <%= yield(:head) %>
 </head>

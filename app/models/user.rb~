@@ -10,8 +10,11 @@ class User < ActiveRecord::Base
   validates_uniqueness_of  :user_name
   validates_presence_of :firstname
   validates_presence_of :lastname
+  validates_presence_of :email
+  validates_uniqueness_of  :email
   validates_presence_of :date_of_birth
- 
-#  has_many :purchases, :dependent => :destroy
+  validates_presence_of :password
+  
+  has_many :purchases
   
 end
