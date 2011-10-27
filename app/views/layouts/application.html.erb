@@ -20,7 +20,7 @@
         <% end -%>
         <% if user_signed_in? -%>
           <li><%= link_to 'My info', edit_user_registration_path %></li>
-          <li><%= link_to 'Sign out', destroy_user_session_path, :method => "delete" %></li>
+          <li><%= link_to 'Sign out', destroy_user_session_path %></li>
           <li><%= link_to 'New purchase', new_purchase_path %></li>
         <% else -%>
         <% end -%>
