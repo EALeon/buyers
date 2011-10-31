@@ -7,11 +7,8 @@ class User < ActiveRecord::Base
   attr_accessible :user_name, :firstname, :lastname, :email, :date_of_birth, :password, :password_confirmation, :remember_me #, :city
   # Nested attributes
   validates_presence_of :user_name
-  validates_uniqueness_of  :user_name
-  validates_presence_of :firstname
-  validates_presence_of :lastname
-  validates_presence_of :date_of_birth
- 
-#  has_many :purchases, :dependent => :destroy
-  
+  validates_uniqueness_of :user_name
+
+  has_many :purchases, :dependent => :destroy
+  accepts_nested_attributes_for :purchases
 end
