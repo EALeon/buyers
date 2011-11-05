@@ -5,3 +5,15 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+
+City.create(:name => 'Сыктывкар')
+City.create(:name => 'Санкт-Петербург')
+City.create(:name => 'Архангельск')
+City.create(:name => 'Петрозаводск')
+City.create(:name => 'Печора')
+City.create(:name => 'Петропавловск-Камчатский')
+City.create(:name => 'Пермь')
+City.create(:name => 'Казань')
+City.create(:name => 'Киев')
+City.create(:name => 'Липецк')
+City.create(:name => 'Воронеж')
