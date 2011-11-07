@@ -1,24 +1,37 @@
-<%= form_for(@purchase) do |f| %>
+<%= form_for @purchase, :html => { :multipart => true } do |f| %>
   <% if @purchase.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@purchase.errors.count, "error") %> prohibited this purchase from being saved:</h2>
-
       <ul>
-      <% @purchase.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @purchase.errors.full_messages.each do |msg| %><li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
   <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :size => 25 %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br />
+    <%= f.text_field :price, :size => 10 %>
+  </div>
+  <div class="field">
+    <%= f.label :city %><br />
+    <%= f.hidden_field :city_id, :id => "city_id" %>
+    <%= autocomplete_field_tag 'temp_city_name', '', autocomplete_city_name_purchases_path, :size => 25, :id_element => "#city_id" %><br />
+  </div>
+  <div class="field">
+    <%= f.label :picture %><br />
+    <%= f.file_field :picture, :class => "multi", :maxlength => 1, :accept => "jpg|png" %><br />
+    <%= link_to image_tag(@purchase.picture.url(:thumb)), @purchase.picture.url(:medium), :class => "lightbox", :title => @purchase.name, :rel => "roadtrip" %>
   </div>
   <div class="field">
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

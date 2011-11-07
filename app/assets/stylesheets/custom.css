@@ -85,6 +85,9 @@ nav ul li a:hover {
   text-decoration: underline;
 }
 
+field {
+  list-style-type: none;
+}
 footer {
   text-align: center;
   margin-top: 10px;

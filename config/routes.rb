@@ -1,6 +1,7 @@
 Buyers::Application.routes.draw do
-  resources :purchases
-
+  resources :purchases do
+    get :autocomplete_city_name, :on => :collection
+  end
 #  get "purchases/purchases"
 
   devise_for :users, :path_names => {:sign_in => "register"}

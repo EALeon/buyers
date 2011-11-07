@@ -4,25 +4,29 @@
   <%= devise_error_messages! %>
 
   <div><%= f.label :user_name %>:<br />
-  <%= f.text_field :user_name %></div>
+    <%= f.text_field :user_name, :size => 25 %></div>
 
   <div><%= f.label :firstname %>:<br />
-  <%= f.text_field :firstname %></div>
+    <%= f.text_field :firstname, :size => 25 %></div>
 
   <div><%= f.label :lastname %>:<br />
-  <%= f.text_field :lastname %></div>
+    <%= f.text_field :lastname, :size => 25 %></div>
 
   <div><%= f.label :date_of_birth %>:<br />
-  <%= f.date_select :date_of_birth, :start_year=>Date.current.year, :end_year=>1900 %></div>
+    <%= f.date_select :date_of_birth, :start_year=>Date.current.year, :end_year=>1900 %></div>
+
+  <div><%= f.label :city %><br />
+    <%= f.hidden_field :city_id, :id => "city_id" %>
+    <%= autocomplete_field_tag "temp_city_name", "", autocomplete_city_name_purchases_path, :size => 25, :id_element => "#city_id" %><br /></div>
 
   <div><%= f.label :email %>:<br />
-  <%= f.email_field :email %></div>
+    <%= f.email_field :email, :size => 25 %></div>
   
   <div><%= f.label :password %>:<br />
-  <%= f.password_field :password %></div>
+    <%= f.password_field :password, :size => 25 %></div>
 
   <div><%= f.label :password_confirmation %>:<br />
-  <%= f.password_field :password_confirmation %></div>
+    <%= f.password_field :password_confirmation, :size => 25 %></div>
 
   <div><%= f.submit "Sign up" %></div>
 <% end %>

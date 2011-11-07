@@ -2,9 +2,9 @@
 <html>
 <head>
   <title>Buyers</title>
-  <%= stylesheet_link_tag 'blueprint/screen'%>
-  <%= stylesheet_link_tag 'custom', :media => 'screen' %>
-  <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag "blueprint/screen", "jquery-ui-1.8.16.custom.css" %>
+  <%= stylesheet_link_tag "custom", :media => "screen" %>
+  <%= javascript_include_tag "application", "jquery-1.6.2.min.js", "jquery-ui-1.8.16.custom.min.js", "jquery.MultiFile.js", "autocomplete-rails.js", "rails.js" %>
   <%= csrf_meta_tag %>
   <%= yield(:head) %>
 </head>
@@ -14,15 +14,15 @@
     <nav class="round">
       <ul>
         <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to 'Back', :back %></li>
+        <li><%= link_to "Back", :back %></li>
         <% unless user_signed_in? -%>
           <li><%= link_to "Sign in", new_user_session_path %></li>
         <% end -%>
         <% if user_signed_in? -%>
-          <li><%= link_to 'My info', edit_user_registration_path %></li>
-          <li><%= link_to 'Sign out', destroy_user_session_path %></li>
-          <li><%= link_to 'Cancel my account', registration_path(current_user), :confirm => "Are you sure?", :method => "delete" %></li>
-          <li><%= link_to 'New purchase', new_purchase_path %></li>
+          <li><%= link_to "My info", edit_user_registration_path %></li>
+          <li><%= link_to "New purchase", new_purchase_path %></li>
+          <li><%= link_to "Sign out", destroy_user_session_path %></li>
+          <li><%= link_to "Cancel my account", registration_path(current_user), :confirm => "Are you sure?", :method => "delete" %></li>
         <% else -%>
         <% end -%>
       </ul>
