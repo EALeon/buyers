@@ -13,6 +13,9 @@
     <%= label_tag :city %><br />
     <%= hidden_field_tag :c %>
     <%= autocomplete_field_tag "", "", autocomplete_city_name_purchases_path, :size => 25, :id_element => "#c" %><br />
+    <% if user_signed_in? -%>
+      <%= check_box_tag 'my_id', value=current_user.id, true %><%= label_tag :my_purchases %><br />
+    <% end -%>
     <%= submit_tag "Search", :name => nil %>
   </p>
 <% end %>
@@ -33,6 +36,7 @@
       <% end %>
       <tr><td><b>Price: </b><span class="price" ><%= number_to_currency(purchase.price, :unit =>"RUB ") %></td></tr>
       <tr><td><b>Description: </b><%= purchase.description %></td></tr>
+      <tr><td><b>Creator: </b><%= purchase.user.user_name %></td></tr>
       <tr><td><b>Created: </b><%= purchase.created_at %></td></tr>
       <tr><td><b>Modified: </b><%= purchase.updated_at %></td></tr>
       <tr><td><%= link_to 'Show', purchase %>

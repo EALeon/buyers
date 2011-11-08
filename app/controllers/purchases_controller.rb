@@ -2,7 +2,7 @@ class PurchasesController < ApplicationController
   autocomplete :city, :name
 
   def index
-    @purchases = Purchase.search(params[:n], params[:p], params[:c])
+    @purchases = Purchase.search(params[:n], params[:p], params[:c], params[:my_id])
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @purchases }
