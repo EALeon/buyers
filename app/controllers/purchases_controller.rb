@@ -11,6 +11,7 @@ class PurchasesController < ApplicationController
 
   def show
     @purchase = Purchase.find(params[:id])
+    @city = City.find_by_sql ["SELECT name FROM cities WHERE id = ?", @purchase.city_id]
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @purchase }
@@ -27,6 +28,7 @@ class PurchasesController < ApplicationController
 
   def edit
     @purchase = current_user.purchases.find(params[:id])
+    @city = City.find_by_sql ["SELECT name FROM cities WHERE id = ?", @purchase.city_id]
   end
 
   def create

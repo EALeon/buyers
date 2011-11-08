@@ -14,7 +14,12 @@
   <div><%= f.label :date_of_birth %>:<br />
     <%= f.date_select :date_of_birth, :start_year=>Date.current.year, :end_year=>1900 %></div>
 
-  <div><%= f.label :city %>:<%= current_user.city_id%><br />
+    <div>
+    <% if :city_id.nil? %><%= f.label :city %><br />
+    <% else %>
+      <% @city=City.find_by_sql ["SELECT name FROM cities WHERE id = ?", current_user.city_id] %>
+      <%= f.label :city %> (current city - <%= @city.first.name  %>)<br />
+    <% end %>
     <%= f.hidden_field :city_id, :id => "city_id" %>
     <%= autocomplete_field_tag "temp_city_name", "", autocomplete_city_name_purchases_path, :size => 25, :id_element => "#city_id" %><br /></div>
 

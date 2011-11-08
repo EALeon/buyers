@@ -3,9 +3,10 @@
 <%= link_to image_tag(@purchase.picture.url(:small)), @purchase.picture.url(:medium), :class => "lightbox", :title => @purchase.name, :rel => "roadtrip" %>
 
 <p><b>Name: </b><%= @purchase.name %></p>
-
+<% if @purchase.city_id.nil? %><p><b>Сity: </b></p>
+<% else %><p><b>Сity: </b><%= @city.first.name %></p>
+<% end %>
 <p><b>Price: </b><%= number_to_currency(@purchase.price, :unit =>"RUB ")  %></p>
-<p><b>Сity: </b><%= @purchase.city_id %></p>
 <p><b>Description: </b><%= @purchase.description %></p>
 
 <% if user_signed_in? and (@purchase.user_id == current_user.id) %>

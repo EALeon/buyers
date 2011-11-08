@@ -10,6 +10,11 @@
   <td>
     <table>
       <tr><td><b>Name: </b><%= purchase.name %></td></tr>
+      <% if purchase.city_id.nil? %><tr><td><b>Сity: </b></td></tr>
+      <% else %>
+        <% @city=City.find_by_sql ["SELECT name FROM cities WHERE id = ?", purchase.city_id] %>
+        <tr><td><b>Сity: </b><%= @city.first.name %></td></tr>
+      <% end %>
       <tr><td><b>Price: </b><span class="price" ><%= number_to_currency(purchase.price, :unit =>"RUB ") %></td></tr>
       <tr><td><b>Description: </b><%= purchase.description %></td></tr>
       <tr><td><%= link_to 'Show', purchase %>
