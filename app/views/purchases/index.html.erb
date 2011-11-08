@@ -1,7 +1,23 @@
 <h1>Welcome to shopping catalog!</h1><br />
 <%unless user_signed_in? -%>
   <%= link_to "Sign up now!", new_user_registration_path, :class => "signup_button round" %>
-<% end -%><br />
+<% end -%>
+
+<div>
+<%= form_tag @purchase, :method => 'get' do %>
+  <p>
+    <%= label_tag :name %><br />
+    <%= text_field_tag :n, params[:n], :size => 25 %><br />
+    <%= label_tag :max_price %><br />
+    <%= text_field_tag :p, params[:p], :size => 7 %><br />
+    <%= label_tag :city %><br />
+    <%= hidden_field_tag :c %>
+    <%= autocomplete_field_tag "", "", autocomplete_city_name_purchases_path, :size => 25, :id_element => "#c" %><br />
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+</div>
+
 <h2>Listing purchases</h2>
 
 <table>

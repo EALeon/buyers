@@ -13,4 +13,16 @@ class Purchase < ActiveRecord::Base
   validates_attachment_presence :picture
   validates_attachment_size :picture, :less_than => 5.megabytes
   validates_attachment_content_type :picture, :content_type => ['image/jpeg', 'image/png']
+
+  def self.search(n, p, c)
+    sql_search_str = "Select * From purchases Where name Like ?"
+    if p.nil? or p == ""
+    else sql_search_str = sql_search_str + " And price <= " + p
+    end
+    if c.nil? or c == ""
+    else
+      sql_search_str = sql_search_str + " And city_id = " + c
+    end
+    @purchases = Purchase.find_by_sql [sql_search_str, "%#{n}%"]
+  end
 end
