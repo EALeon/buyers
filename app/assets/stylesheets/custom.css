@@ -10,11 +10,6 @@ header {
   padding-top: 20px;
 }
 
-/*header img {
-  padding: 1em;
-  background: #fff;
-}*/
-
 section {
   margin-top: 3em;
   font-size: 120%;
@@ -114,32 +109,6 @@ a.signup_button {
   font-weight: bold;
   padding: 20px;
 }
-
-/* User show page */
-
-/*table.profile {
-  width: 100%;
-  margin-bottom: 0;
-}
-
-td.main {
-  width: 70%;
-  padding: 1em;
-}
-
-td.sidebar {
-  width: 30%;
-  padding: 1em;
-  vertical-align: top;
-  border: 1px solid blue;
-  background: silver; /*#ffc;*/
-    /*float: right;
-}*/
-
-/*.profile img.gravatar {
-  border: 1px solid #999;
-  margin-bottom: -15px;
-}*/
 
 /* Round corners */
 

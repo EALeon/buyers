@@ -1,0 +1,10 @@
+<% @purchase.comment_threads.each do |comment| %>
+  <b><%= comment.user.user_name %></b> wrote -<br/>
+  <%= comment.body %><br/>
+  All votes - <%= comment.votes.size %> (Like - <%= comment.likes.size %>/Dislike - <%= comment.dislikes.size %>)
+  <strong>
+    <%= link_to "+", :controller => "purchases", :action => "show", :model => "comment",  :liked => "true", :comment_id => comment.id %> |
+    <%= link_to "-", :controller => "purchases", :action => "show", :model => "comment",  :liked => "false", :comment_id => comment.id %>
+  </strong>
+  <br/>
+<% end %>

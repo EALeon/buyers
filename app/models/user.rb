@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  acts_as_voter
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -11,7 +12,6 @@ class User < ActiveRecord::Base
 
   has_many :purchases, :dependent => :destroy
   belongs_to :city
-#  has_one :city
 
   accepts_nested_attributes_for :purchases
 end

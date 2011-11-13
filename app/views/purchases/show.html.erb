@@ -1,13 +1,28 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to image_tag(@purchase.picture.url(:small)), @purchase.picture.url(:medium), :class => "lightbox", :title => @purchase.name, :rel => "roadtrip" %>
+<%= link_to image_tag(@purchase.picture.url(:small)), @purchase.picture.url(:medium), :class => "lightbox", :title => @purchase.name, :rel => "roadtrip" %><br/>
 
-<p><b>Name: </b><%= @purchase.name %></p>
-<% if @purchase.city_id.nil? %><p><b>Сity: </b></p>
-<% else %><p><b>Сity: </b><%= @city.first.name %></p>
+<b>Vote: </b>
+<strong>
+  <%= link_to "+", :controller => "purchases", :action => "show", :model => "purchase", :liked => "true" %> |
+  <%= link_to "-", :controller => "purchases", :action => "show", :model => "purchase", :liked => "false" %>
+</strong>
+<b>All votes - </b><%= @purchase.votes.size %> (Like - <%= @purchase.likes.size %>/Dislike - <%= @purchase.dislikes.size %>)<br/>
+
+<b>Name: </b><%= @purchase.name %><br/>
+<% if @purchase.city_id.nil? %><b>Сity: </b>
+<% else %><b>Сity: </b><%= @city.first.name %><br/>
 <% end %>
-<p><b>Price: </b><%= number_to_currency(@purchase.price, :unit =>"RUB ")  %></p>
-<p><b>Description: </b><%= @purchase.description %></p>
+<b>Price: </b><%= number_to_currency(@purchase.price, :unit =>"RUB ")  %><br/>
+<b>Description: </b><%= @purchase.description %><br/>
+<br/>
+<h2>Comments (<%= @purchase.comment_threads.count %>)</h2>
+
+<div id="comments">
+  <%=render :partial => 'comments/index',:locals => {:commentable=> @purchase, :comments => @comments } %>
+</div>
+
+<%= render :partial => "comments/new", :locals => { :commentable => @purchase }%><br/>
 
 <% if user_signed_in? and (@purchase.user_id == current_user.id) %>
   <%= link_to 'Edit', edit_purchase_path(@purchase) %> |

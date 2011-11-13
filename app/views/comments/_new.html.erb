@@ -1,0 +1,8 @@
+<div class="adding_comment">&nbsp;
+<%=form_for [commentable, Comment.new], :remote => false do |f|%>
+  <%= f.hidden_field :commentable_id, :value=> @purchase.id %>
+  <%= f.label :new_comment %><br/>
+  <%= f.text_area :body, :style=>"width:320;height:80px" %><br/>
+  <%= f.submit "Add comment" %>
+<% end %>
+</div>
