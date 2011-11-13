@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 <p>Buyers</p>
 
+=======
+<p>Buyers</p>
+>>>>>>> d1229618e1752a2e879e6870bfc54c66cd8b7be1
