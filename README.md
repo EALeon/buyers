@@ -23,15 +23,16 @@
 
 Приложение разработано в rails 3.1.1 с использованием следующих гемов:
 
-  sqlite3                            - база данных
-  devise                             - аутентификация пользователя
-  rails3-jquery-autocomplete         - гем для полей с автозаполнением
-  paperclip                          - загрузка рисунков
-  acts_as_commentable_with_threading - комментарии
-  acts_as_votable                    - голоса
+  <li>sqlite3                            - база данных;</li>
+  <li>devise                             - аутентификация пользователя;</li>
+  <li>rails3-jquery-autocomplete         - гем для полей с автозаполнением;</li>
+  <li>paperclip                          - загрузка рисунков;</li>
+  <li>acts_as_commentable_with_threading - комментарии;</li>
+  <li>acts_as_votable                    - голоса.</li>
 
 ## Коротко о базе данных
 
   С приложением идет комплект всех необходимых миграций, при необходимости
-можно создать новую базу командой - <pre><code>#rake db:migrate</code></pre>, затем <pre><code>#rake db:seed</code></pre>
+можно создать новую базу командой <pre><code>#rake db:migrate</code></pre>
+затем <pre><code>#rake db:seed</code></pre>
 (добавление наименований городов в таблицу Cities)
