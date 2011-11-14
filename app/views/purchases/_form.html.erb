@@ -30,7 +30,9 @@
   <div class="field">
     <%= f.label :picture %><br />
     <%= f.file_field :picture, :class => "multi", :maxlength => 1, :accept => "jpg|png" %><br />
-    <%= link_to image_tag(@purchase.picture.url(:thumb)), @purchase.picture.url(:medium), :class => "lightbox", :title => @purchase.name, :rel => "roadtrip" %>
+    <% unless @purchase.new_record? %>
+      <%= link_to image_tag(@purchase.picture.url(:thumb)), @purchase.picture.url(:medium), :class => "lightbox", :title => @purchase.name, :rel => "roadtrip" %>
+    <% end %>
   </div>
   <div class="field">
     <%= f.label :description %><br />
