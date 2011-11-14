@@ -1,4 +1,5 @@
 class Purchase < ActiveRecord::Base
+  attr_accessible :name, :description, :price, :user_id, :city_id, :picture
   validates_presence_of :name
   validates_numericality_of :price
 
@@ -15,19 +16,28 @@ class Purchase < ActiveRecord::Base
   acts_as_commentable
   acts_as_votable
 
-  def self.search(n, p, c, my_id)
-    sql_search_str = "Select * From purchases Where purchases.name Like ?"
-    if p.nil? or p == ""
-    else sql_search_str = sql_search_str + " And price <= " + p
+  class << self
+    def search(n, p, c, my_id)
+      price_str = "price <= ?"
+      city_str = "city_id = ?"
+      user_str = "user_id = ?"
+
+      if p.blank?
+        price_str = ""
+      end
+      if c.blank?
+        city_str = ""
+      end
+      if my_id.blank?
+        user_str = ""
+      end
+
+      scope :by_name, lambda{ where("name Like ?", "%#{n}%") }
+      scope :by_price, lambda{ where(price_str, p) }
+      scope :by_city, lambda{ where(city_str, c) }
+      scope :by_user, lambda{ where(user_str, my_id) }
+
+      @purchases = Purchase.by_name.by_price.by_city.by_user
     end
-    if c.nil? or c == ""
-    else
-      sql_search_str = sql_search_str + " And city_id = " + c
-    end
-    if my_id.nil? or my_id == ""
-    else
-      sql_search_str = sql_search_str + " And purchases.user_id = " + my_id
-    end
-    @purchases = Purchase.find_by_sql [sql_search_str, "%#{n}%"]
   end
 end
