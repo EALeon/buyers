@@ -10,13 +10,16 @@
 <b>All votes - </b><%= @purchase.votes.size %> (Like - <%= @purchase.likes.size %>/Dislike - <%= @purchase.dislikes.size %>)<br/>
 
 <b>Name: </b><%= @purchase.name %><br/>
-<% if @purchase.city_id.nil? %><b>Сity: </b>
-<% else %><b>Сity: </b><%= @city.first.name %><br/>
+<% unless @purchase.city_id.nil? %>
+  <b>Сity: </b><%= @purchase.city.name %><br/>
 <% end %>
+
 <b>Price: </b><%= number_to_currency(@purchase.price, :unit =>"RUB ")  %><br/>
-<b>Description: </b><%= @purchase.description %><br/>
+<% unless @purchase.description.blank? %>
+  <b>Description: </b><%= @purchase.description %>
+<% end %>
 <br/>
-<h2>Comments (<%= @purchase.comment_threads.count %>)</h2>
+<h2>Comments (<%= @purchase.comment_threads.count %>) </h2>
 
 <div id="comments">
   <%=render :partial => 'comments/index',:locals => {:commentable=> @purchase, :comments => @comments } %>

@@ -3,7 +3,11 @@ class PurchasesController < ApplicationController
   before_filter :authenticate_user!, :except => [:show, :index]
 
   def index
-    @purchases = Purchase.search(params[:n], params[:p], params[:c], params[:my_id])
+    @purchases = Purchase.scoped({ })
+    @purchases = @purchases.send(:by_name, "%#{params[:name]}%") unless params[:name].blank?
+    @purchases = @purchases.send(:by_price, params[:price]) unless params[:price].blank?
+    @purchases = @purchases.send(:by_city, params[:city_id]) unless params[:city_id].blank?
+    @purchases = @purchases.send(:by_user, params[:user_id]) unless params[:user_id].blank?
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +17,6 @@ class PurchasesController < ApplicationController
 
   def show
     @purchase = Purchase.find(params[:id])
-    @city = City.find_by_sql ["SELECT name FROM cities WHERE id = ?", @purchase.city_id]
 
     if (params[:model]=="purchase")
       if (params[:liked]=="true")
@@ -25,15 +28,15 @@ class PurchasesController < ApplicationController
     end
 
     if(@purchase.comment_threads.count > 0)
-    if (params[:model]=="comment")
-    @comment = Comment.find(params[:comment_id])
-      if (params[:liked]=="true")
-        @comment.liked_by current_user
+      if (params[:model]=="comment")
+        @comment = Comment.find(params[:comment_id])
+        if (params[:liked]=="true")
+          @comment.liked_by current_user
+        end
+        if (params[:liked]=="false")
+          @comment.disliked_by current_user
+        end
       end
-      if (params[:liked]=="false")
-        @comment.disliked_by current_user
-      end
-    end
     end
     respond_to do |format|
       format.html # show.html.erb
@@ -51,14 +54,13 @@ class PurchasesController < ApplicationController
 
   def edit
     @purchase = current_user.purchases.find(params[:id])
-    @city = City.find_by_sql ["SELECT name FROM cities WHERE id = ?", @purchase.city_id]
   end
 
   def create
     @purchase = current_user.purchases.new(params[:purchase])
     respond_to do |format|
       if @purchase.save
-        format.html { redirect_to @purchase, :notice => 'Purchase was successfully created.' }
+        format.html { redirect_to @purchase }
         format.json { render :json => @purchase, :status => :created, :location => @purchase }
       else
         format.html { render :action => "new" }
@@ -71,7 +73,7 @@ class PurchasesController < ApplicationController
     @purchase = current_user.purchases.find(params[:id])
     respond_to do |format|
       if @purchase.update_attributes(params[:purchase])
-        format.html { redirect_to @purchase, :notice => 'Purchase was successfully updated.' }
+        format.html { redirect_to @purchase }
         format.json { head :ok }
       else
         format.html { render :action => "edit" }
@@ -88,5 +90,5 @@ class PurchasesController < ApplicationController
       format.json { head :ok }
     end
   end
-  
+ 
 end

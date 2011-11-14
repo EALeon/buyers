@@ -16,28 +16,9 @@ class Purchase < ActiveRecord::Base
   acts_as_commentable
   acts_as_votable
 
-  class << self
-    def search(n, p, c, my_id)
-      price_str = "price <= ?"
-      city_str = "city_id = ?"
-      user_str = "user_id = ?"
+  scope :by_name, lambda{|name| where("name Like ?", name)}
+  scope :by_price, lambda{|price| where("price <= ?", price) }
+  scope :by_city, lambda{|city_id| where("city_id = ?", city_id) }
+  scope :by_user, lambda{|user_id| where("user_id = ?", user_id) }
 
-      if p.blank?
-        price_str = ""
-      end
-      if c.blank?
-        city_str = ""
-      end
-      if my_id.blank?
-        user_str = ""
-      end
-
-      scope :by_name, lambda{ where("name Like ?", "%#{n}%") }
-      scope :by_price, lambda{ where(price_str, p) }
-      scope :by_city, lambda{ where(city_str, c) }
-      scope :by_user, lambda{ where(user_str, my_id) }
-
-      @purchases = Purchase.by_name.by_price.by_city.by_user
-    end
-  end
 end

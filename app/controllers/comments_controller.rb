@@ -1,9 +1,6 @@
 class CommentsController < ApplicationController
   before_filter :authenticate_user!
 
-  def new
-  end
-
   def create
     @purchase = Purchase.find(params[:comment][:commentable_id])
     @user_who_commented = current_user

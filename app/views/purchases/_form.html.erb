@@ -18,9 +18,12 @@
     <%= f.text_field :price, :size => 10 %>
   </div>
   <div class="field">
-    <% if @purchase.city_id.nil? %><%= f.label :city %><br />
-    <% else %><%= f.label :city %> (current city - <%= @city.first.name  %>)<br />
+    <% unless @purchase.city_id.nil? %>
+      <%= f.label :city %> (current city - <%= @purchase.city.name %>)<br />
+    <% else %>
+      <%= f.label :city %><br />
     <% end %>
+
     <%= f.hidden_field :city_id, :id => "city_id" %>
     <%= autocomplete_field_tag 'temp_city_name', '', autocomplete_city_name_purchases_path, :size => 25, :id_element => "#city_id" %><br />
   </div>
